@@ -72,6 +72,36 @@ echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
 EOF
 }
 
+resource "aws_instance" "web_host_no_user_data_1" {
+  # ec2 have plain text secrets in user data
+  ami           = "${var.ami}"
+  instance_type = "t3.nano"
+}
+
+resource "aws_instance" "web_host_no_user_data_2" {
+  # ec2 have plain text secrets in user data
+  ami           = "${var.ami}"
+  instance_type = "t3.nano"
+}
+
+resource "aws_instance" "web_host_no_user_data_3" {
+  # ec2 have plain text secrets in user data
+  ami           = "${var.ami}"
+  instance_type = "t3.nano"
+}
+
+resource "aws_instance" "web_host_no_user_data_4" {
+  # ec2 have plain text secrets in user data
+  ami           = "${var.ami}"
+  instance_type = "t3.nano"
+}
+
+resource "aws_instance" "web_host_no_user_data_5" {
+  # ec2 have plain text secrets in user data
+  ami           = "${var.ami}"
+  instance_type = "t3.nano"
+}
+
 resource "aws_ebs_volume" "web_host_storage" {
   # unencrypted volume
   availability_zone = "${var.availability_zone}"
