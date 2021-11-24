@@ -11,3 +11,26 @@ Resources:
     Properties:
       VersioningConfiguration:
         Status: Enabled
+
+  FlowBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-flowlogs"
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-flowlogs"
+
+  #############
+  ###  IAM  ###
+  #############
+
+  User:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-user"
+      Tags:
+        - Key: Name
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-user"
+        - Key: Environment
+          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}"
