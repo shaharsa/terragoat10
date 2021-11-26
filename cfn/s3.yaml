@@ -1,25 +1,33 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
 Resources:
-  S3BucketSuspended:
-    Type: 'AWS::S3::Bucket'
-    Properties:
-      VersioningConfiguration:
-        Status: Suspended
   S3BucketEnabled:
     Type: 'AWS::S3::Bucket'
     Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+      # versioning is great
+      VersioningConfiguration:
+        Status: Enabled
+
+  S3BucketSpaces:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+
+      # versioning is great
+
       VersioningConfiguration:
         Status: Enabled
 
   FlowBucket:
     Type: AWS::S3::Bucket
-    DeletionPolicy: Delete
     Properties:
-      BucketName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-flowlogs"
+      BucketName: !Sub "${AWS::AccountId}-flowlogs"
       Tags:
         - Key: Name
-          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-flowlogs"
+          Value: !Sub "${AWS::AccountId}-flowlogs"
 
   #############
   ###  IAM  ###
@@ -28,9 +36,4 @@ Resources:
   User:
     Type: AWS::IAM::User
     Properties:
-      UserName: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-user"
-      Tags:
-        - Key: Name
-          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}-user"
-        - Key: Environment
-          Value: !Sub "${AWS::AccountId}-${CompanyName}-${Environment}"
+      UserName: "user"
