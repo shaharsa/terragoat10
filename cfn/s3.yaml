@@ -15,6 +15,7 @@ Resources:
     Properties:
       PublicAccessBlockConfiguration:
         BlockPublicAcls: True
+        BlockPublicPolicy: True
 
       # versioning is great
 
