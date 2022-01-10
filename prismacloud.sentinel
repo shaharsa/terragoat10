@@ -1,6 +1,6 @@
 import "http"
 import "json"
-req = http.request("https://www.pcdev2.bridgecrew.cloud/api/v1/tfCloud/sentinel/ws-KgD7B7cgRVJFyjQm").with_header("Authorization", "d4d97efc-0506-46cb-8672-fb0a8efc05fb::DXuFXAY3zDMinFvwpVmZW1bFurA=")
+req = http.request("https://www.pcdev2.bridgecrew.cloud/api/v1/tfCloud/sentinel/ws-KgD7B7cgRVJFyjQm").with_header("x-redlock-auth", "d4d97efc-0506-46cb-8672-fb0a8efc05fb::DXuFXAY3zDMinFvwpVmZW1bFurA=")
 resp = json.unmarshal(http.get(req).body)
 if (length(resp.violations) > 0) {
     print("Violations:\n")
