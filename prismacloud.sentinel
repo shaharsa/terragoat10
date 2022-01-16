@@ -4,7 +4,7 @@ import "json"
 loginReq = http.request("https://api-stage.prismacloud.io/login").with_body(json.marshal({"username": "7660d308-fef0-45aa-babe-9475f44a8175", "password": "8ijDUZBF2bhMU2ruOx9wv35oJU0="})).with_header("Content-Type", "application/json")
 resp2 = http.post(loginReq).body
 print(resp2.token)
-req = http.request("https://www.stage.bridgecrew.cloud/api/v1/tfCloud/sentinel/ws-KgD7B7cgRVJFyjQm").with_header("Authorization", resp2.token)
+req = http.request("https://api-stage.prismacloud.io/bridgecrew/api/v1/tfCloud/sentinel/ws-KgD7B7cgRVJFyjQm").with_header("authorization", resp2.token)
 resp = json.unmarshal(http.get(req).body)
 if (length(resp.violations) > 0) {
     print("Violations:\n")
