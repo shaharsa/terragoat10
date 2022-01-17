@@ -3,8 +3,8 @@ import "json"
 
 loginReq = http.request("https://api3briddev.k8sdev.prismacloud.io/login").with_body(json.marshal({"username": "acaa816e-e84b-43ab-917d-00be1e64829f", "password": "oY//pZIZovIN7wWjUba1MIz2EH0="})).with_header("Content-Type", "application/json")
 loginResp = json.unmarshal(http.post(loginReq).body)
-print("Request path:", loginResp)
-req = http.request("https://api3briddev.k8sdev.prismacloud.io/bridgecrew/api/v1/tfCloud/sentinel/ws-KgD7B7cgRVJFyjQm").with_header("Authorization", loginResp.token)
+
+req = http.request("https://app3briddev.k8sdev.prismacloud.io/bridgecrew/api/v1/tfCloud/sentinel/s").with_header("Authorization", loginResp.token)
 resp = json.unmarshal(http.get(req).body)
 if (length(resp.violations) > 0) {
     print("Violations:\n")
@@ -17,5 +17,3 @@ if (length(resp.violations) > 0) {
 }
 print("More details: " + resp.details_url)  
 main = rule { length(resp.violations) < 1 }
-
-
