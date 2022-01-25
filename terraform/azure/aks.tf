@@ -22,4 +22,7 @@ resource azurerm_kubernetes_cluster "k8s_cluster" {
   role_based_access_control {
     enabled = false
   }
+  tags = {
+    yor_trace = "87ddb521-7a79-442f-bbe5-2e7f9bcd760a"
+  }
 }
