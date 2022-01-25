@@ -16,6 +16,7 @@ resource "azurerm_sql_server" "example" {
   tags = {
     environment = var.environment
     terragoat   = "true"
+    yor_trace   = "b2887aab-64ed-4241-bd83-10387472daa0"
   }
 }
 
@@ -49,6 +50,9 @@ resource "azurerm_mysql_server" "example" {
   infrastructure_encryption_enabled = true
   public_network_access_enabled     = true
   ssl_enforcement_enabled           = false
+  tags = {
+    yor_trace = "90ba8abd-dda4-4dc1-be78-810826f067a2"
+  }
 }
 
 resource "azurerm_postgresql_server" "example" {
@@ -64,6 +68,9 @@ resource "azurerm_postgresql_server" "example" {
   administrator_login_password = "Aa12345678"
   version                      = "9.5"
   ssl_enforcement_enabled      = false
+  tags = {
+    yor_trace = "1267543d-bba3-428f-b417-03f90d3ad163"
+  }
 }
 
 resource "azurerm_postgresql_configuration" "thrtottling_config" {

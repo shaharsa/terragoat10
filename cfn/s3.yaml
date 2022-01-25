@@ -9,7 +9,9 @@ Resources:
       # versioning is great
       VersioningConfiguration:
         Status: Enabled
-
+      Tags:
+        - Key: yor_trace
+          Value: 9f8d481a-f433-4648-9451-afa42fb4ec27
   S3BucketSpaces:
     Type: 'AWS::S3::Bucket'
     Properties:
@@ -20,7 +22,9 @@ Resources:
 
       VersioningConfiguration:
         Status: Enabled
-
+      Tags:
+        - Key: yor_trace
+          Value: 37ad980a-e2c7-40bd-a3fc-34f9748e4378
   FlowBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -28,12 +32,16 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-flowlogs"
+        - Key: yor_trace
+          Value: b0a3da37-3015-400e-82ce-aa4fc4702a0e
 
   #############
   ###  IAM  ###
   #############
-
   User:
     Type: AWS::IAM::User
     Properties:
       UserName: "user"
+      Tags:
+        - Key: yor_trace
+          Value: da0bf305-42c5-4ec8-b519-ea1d00be2a81
