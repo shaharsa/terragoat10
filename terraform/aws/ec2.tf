@@ -19,6 +19,7 @@ echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
 EOF
   tags = {
     Name = "${local.resource_prefix.value}-ec2"
+    team = "asd"
   }
 }
 
@@ -38,6 +39,9 @@ export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMAAAKEY
 export AWS_DEFAULT_REGION=us-west-2
 echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
 EOF
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "aws_instance" "web_host_3" {
@@ -55,6 +59,9 @@ export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMAAA
 export AWS_DEFAULT_REGION=us-west-2
 echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
 EOF
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "aws_instance" "web_host_no_secret" {
@@ -70,36 +77,54 @@ sudo systemctl start apache2
 sudo systemctl enable apache2
 echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
 EOF
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "aws_instance" "web_host_no_user_data_1" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "aws_instance" "web_host_no_user_data_2" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "aws_instance" "web_host_no_user_data_3" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "aws_instance" "web_host_no_user_data_4" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "aws_instance" "web_host_no_user_data_5" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "aws_ebs_volume" "web_host_storage" {
@@ -109,6 +134,7 @@ resource "aws_ebs_volume" "web_host_storage" {
   size = 1
   tags = {
     Name = "${local.resource_prefix.value}-ebs"
+    team = "asd"
   }
 }
 
@@ -118,6 +144,7 @@ resource "aws_ebs_snapshot" "example_snapshot" {
   description = "${local.resource_prefix.value}-ebs-snapshot"
   tags = {
     Name = "${local.resource_prefix.value}-ebs-snapshot"
+    team = "asd"
   }
 }
 
@@ -155,6 +182,9 @@ resource "aws_security_group" "web-node" {
     "0.0.0.0/0"]
   }
   depends_on = [aws_vpc.web_vpc]
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "aws_vpc" "web_vpc" {
@@ -163,6 +193,7 @@ resource "aws_vpc" "web_vpc" {
   enable_dns_support   = true
   tags = {
     Name = "${local.resource_prefix.value}-vpc"
+    team = "asd"
   }
 }
 
@@ -174,6 +205,7 @@ resource "aws_subnet" "web_subnet" {
 
   tags = {
     Name = "${local.resource_prefix.value}-subnet"
+    team = "asd"
   }
 }
 
@@ -185,6 +217,7 @@ resource "aws_subnet" "web_subnet2" {
 
   tags = {
     Name = "${local.resource_prefix.value}-subnet2"
+    team = "asd"
   }
 }
 
@@ -194,6 +227,7 @@ resource "aws_internet_gateway" "web_igw" {
 
   tags = {
     Name = "${local.resource_prefix.value}-igw"
+    team = "asd"
   }
 }
 
@@ -202,6 +236,7 @@ resource "aws_route_table" "web_rtb" {
 
   tags = {
     Name = "${local.resource_prefix.value}-rtb"
+    team = "asd"
   }
 }
 
@@ -232,6 +267,7 @@ resource "aws_network_interface" "web-eni" {
 
   tags = {
     Name = "${local.resource_prefix.value}-primary_network_interface"
+    team = "asd"
   }
 }
 
@@ -245,6 +281,7 @@ resource "aws_flow_log" "vpcflowlogs" {
   tags = {
     Name        = "${local.resource_prefix.value}-flowlogs"
     Environment = local.resource_prefix.value
+    team        = "asd"
   }
 }
 
@@ -255,6 +292,7 @@ resource "aws_s3_bucket" "flowbucket" {
   tags = {
     Name        = "${local.resource_prefix.value}-flowlogs"
     Environment = local.resource_prefix.value
+    team        = "asd"
   }
 }
 

@@ -7,6 +7,9 @@ resource azurerm_app_service_plan "example" {
     tier = "Dynamic"
     size = "S1"
   }
+  tags = {
+    team = "asd"
+  }
 }
 
 resource azurerm_app_service "app-service1" {
@@ -17,6 +20,9 @@ resource azurerm_app_service "app-service1" {
   https_only          = false
   site_config {
     min_tls_version = "1.1"
+  }
+  tags = {
+    team = "asd"
   }
 }
 
@@ -29,6 +35,9 @@ resource azurerm_app_service "app-service2" {
 
   auth_settings {
     enabled = false
+  }
+  tags = {
+    team = "asd"
   }
 }
 

@@ -5,6 +5,7 @@ resource "aws_iam_user" "user" {
   tags = {
     Name        = "${local.resource_prefix.value}-user"
     Environment = local.resource_prefix.value
+    team        = "asd"
   }
 
 }
