@@ -29,6 +29,7 @@ resource azurerm_linux_virtual_machine "linux_machine" {
   tags = {
     terragoat   = true
     environment = var.environment
+    team        = "asd"
   }
 }
 
@@ -55,5 +56,6 @@ resource azurerm_windows_virtual_machine "windows_machine" {
   tags = {
     terragoat   = true
     environment = var.environment
+    team        = "asd"
   }
 }

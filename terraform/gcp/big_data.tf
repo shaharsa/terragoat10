@@ -24,4 +24,7 @@ resource google_bigquery_dataset "dataset" {
     special_group = "allAuthenticatedUsers"
     role          = "READER"
   }
+  labels = {
+    team = "asd"
+  }
 }

@@ -8,6 +8,9 @@ resource "azurerm_managed_disk" "example" {
   encryption_settings {
     enabled = false
   }
+  tags = {
+    team = "asd"
+  }
 }
 
 resource "azurerm_storage_account" "example" {
@@ -36,6 +39,9 @@ resource "azurerm_storage_account" "example" {
       version               = "1.0"
       retention_policy_days = 10
     }
+  }
+  tags = {
+    team = "asd"
   }
 }
 

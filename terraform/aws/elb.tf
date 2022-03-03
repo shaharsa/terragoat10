@@ -27,5 +27,6 @@ resource "aws_elb" "weblb" {
 
   tags = {
     Name = "foobar-terraform-elb"
+    team = "asd"
   }
 }
