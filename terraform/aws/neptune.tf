@@ -6,7 +6,7 @@ resource "aws_neptune_cluster" "default" {
   skip_final_snapshot                 = true
   iam_database_authentication_enabled = false
   apply_immediately                   = true
-  storage_encrypted                   = false
+  storage_encrypted                   = true
 }
 
 resource "aws_neptune_cluster_instance" "default" {

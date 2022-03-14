@@ -14,6 +14,15 @@ resource "aws_elasticsearch_domain" "monitoring-framework" {
     ebs_enabled = true
     volume_size = 30
   }
+  domain_endpoint_options {
+    enforce_https = true
+  }
+  encrypt_at_rest {
+    enabled = true
+  }
+  log_publishing_options {
+    cloudwatch_log_group_arn = "CKV_ANY"
+  }
 }
 
 data aws_iam_policy_document "policy" {
