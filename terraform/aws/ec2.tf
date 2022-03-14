@@ -6,20 +6,11 @@ resource "aws_instance" "web_host" {
   vpc_security_group_ids = [
   "${aws_security_group.web-node.id}"]
   subnet_id = "${aws_subnet.web_subnet.id}"
-  user_data = <<EOF
-#! /bin/bash
-sudo apt-get update
-sudo apt-get install -y apache2
-sudo systemctl start apache2
-sudo systemctl enable apache2
-export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMAAA
-export AWS_SECRET_ACCESS_KEY=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
-export AWS_DEFAULT_REGION=us-west-2
-echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
-EOF
   tags = {
     Name = "${local.resource_prefix.value}-ec2"
   }
+  ebs_optimized = true
+  monitoring = true
 }
 
 resource "aws_instance" "web_host_2" {
@@ -27,17 +18,8 @@ resource "aws_instance" "web_host_2" {
   ami           = "${var.ami}"
   instance_type = "t2.nano"
 
-  user_data = <<EOF
-#! /bin/bash
-sudo apt-get update
-sudo apt-get install -y apache2
-sudo systemctl start apache2
-sudo systemctl enable apache2
-export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMAAA
-export AWS_SECRET_ACCESS_KEY=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
-export AWS_DEFAULT_REGION=us-west-2
-echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
-EOF
+  ebs_optimized = true
+  monitoring = true
 }
 
 resource "aws_instance" "web_host_3" {
@@ -45,16 +27,8 @@ resource "aws_instance" "web_host_3" {
   ami           = "${var.ami}"
   instance_type = "t3.nano"
 
-  user_data = <<EOF
-#! /bin/bash
-sudo apt-get update
-sudo apt-get install -y apache2
-sudo systemctl start apache2
-sudo systemctl enable apache2
-export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMAAA
-export AWS_DEFAULT_REGION=us-west-2
-echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
-EOF
+  ebs_optimized = true
+  monitoring = true
 }
 
 resource "aws_instance" "web_host_no_secret" {
@@ -70,36 +44,48 @@ sudo systemctl start apache2
 sudo systemctl enable apache2
 echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
 EOF
+  ebs_optimized = true
+  monitoring = true
 }
 
 resource "aws_instance" "web_host_no_user_data_1" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  ebs_optimized = true
+  monitoring = true
 }
 
 resource "aws_instance" "web_host_no_user_data_2" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  ebs_optimized = true
+  monitoring = true
 }
 
 resource "aws_instance" "web_host_no_user_data_3" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  ebs_optimized = true
+  monitoring = true
 }
 
 resource "aws_instance" "web_host_no_user_data_4" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  ebs_optimized = true
+  monitoring = true
 }
 
 resource "aws_instance" "web_host_no_user_data_5" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
   instance_type = "t3.nano"
+  ebs_optimized = true
+  monitoring = true
 }
 
 resource "aws_ebs_volume" "web_host_storage" {
@@ -110,6 +96,7 @@ resource "aws_ebs_volume" "web_host_storage" {
   tags = {
     Name = "${local.resource_prefix.value}-ebs"
   }
+  encrypted = true
 }
 
 resource "aws_ebs_snapshot" "example_snapshot" {
@@ -170,7 +157,6 @@ resource "aws_subnet" "web_subnet" {
   vpc_id                  = aws_vpc.web_vpc.id
   cidr_block              = "172.16.10.0/24"
   availability_zone       = var.availability_zone
-  map_public_ip_on_launch = true
 
   tags = {
     Name = "${local.resource_prefix.value}-subnet"
@@ -181,7 +167,6 @@ resource "aws_subnet" "web_subnet2" {
   vpc_id                  = aws_vpc.web_vpc.id
   cidr_block              = "172.16.11.0/24"
   availability_zone       = var.availability_zone2
-  map_public_ip_on_launch = true
 
   tags = {
     Name = "${local.resource_prefix.value}-subnet2"
@@ -255,6 +240,16 @@ resource "aws_s3_bucket" "flowbucket" {
   tags = {
     Name        = "${local.resource_prefix.value}-flowlogs"
     Environment = local.resource_prefix.value
+  }
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "aws:kms"
+      }
+    }
+  }
+  versioning {
+    enabled = true
   }
 }
 

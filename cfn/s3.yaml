@@ -6,20 +6,34 @@ Resources:
     Properties:
       PublicAccessBlockConfiguration:
         BlockPublicAcls: True
+        RestrictPublicBuckets: True
+        IgnorePublicAcls: True
+        BlockPublicPolicy: True
       # versioning is great
       VersioningConfiguration:
         Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
 
   S3BucketSpaces:
     Type: 'AWS::S3::Bucket'
     Properties:
       PublicAccessBlockConfiguration:
         BlockPublicAcls: True
+        RestrictPublicBuckets: True
+        BlockPublicPolicy: True
+        IgnorePublicAcls: True
 
       # versioning is great
 
       VersioningConfiguration:
         Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
 
   FlowBucket:
     Type: AWS::S3::Bucket
@@ -28,6 +42,17 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${AWS::AccountId}-flowlogs"
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+        RestrictPublicBuckets: True
+        IgnorePublicAcls: True
+        BlockPublicPolicy: True
+      VersioningConfiguration:
+        Status: Enabled
 
   #############
   ###  IAM  ###
