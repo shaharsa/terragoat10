@@ -19,12 +19,16 @@ resource "azurerm_key_vault" "example" {
     environment = var.environment
     terragoat   = true
   }
+  purge_protection_enabled = true
+  network_acls {
+    default_action = "Deny"
+  }
 }
 
 resource "azurerm_key_vault_key" "generated" {
   name         = "terragoat-generated-certificate-${var.environment}"
   key_vault_id = azurerm_key_vault.example.id
-  key_type     = "RSA"
+  key_type     = "RSA-HSM"
   key_size     = 2048
   key_opts = [
     "decrypt",
